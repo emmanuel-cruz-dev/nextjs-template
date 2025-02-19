@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 function HomePage() {
@@ -18,6 +19,7 @@ function AboutPage() {
       <h1>About</h1>
       <div>
         <img
+          style={{ borderRadius: "50%", width: "7rem" }}
           src="https://github.com/emmanuel-cruz-dev.png"
           alt="Foto de Emmanuel"
         />
@@ -29,10 +31,11 @@ function AboutPage() {
 }
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   return (
     <main>
-      <h2>React Router</h2>
-      <HomePage />
+      {currentPath == "/" && <HomePage />}
+      {currentPath == "/about" && <AboutPage />}
     </main>
   );
 }
