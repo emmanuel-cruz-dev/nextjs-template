@@ -13,6 +13,10 @@ const appRoutes = [
     path: "/about",
     Component: AboutPage,
   },
+  {
+    path: "/search/:query",
+    Component: () => <h1>Buscador</h1>,
+  },
 ];
 
 function App() {
