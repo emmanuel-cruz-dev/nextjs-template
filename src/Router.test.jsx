@@ -2,6 +2,8 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { Router } from "./Router";
 import { getCurrentPath } from "./utils";
+import Route from "./Route";
+import { Link } from "./Link";
 
 vi.mock("./utils.js", () => ({
   getCurrentPath: vi.fn(),
@@ -24,7 +26,7 @@ describe("Router", () => {
   });
 
   it("should render the component of the first route that matches", () => {
-    getCurrentPath.mockReturnValue("/");
+    getCurrentPath.mockReturnValue("/about");
 
     const routes = [
       {
@@ -38,6 +40,35 @@ describe("Router", () => {
     ];
 
     render(<Router routes={routes} />);
-    expect(screen.getByText("Home")).toBeTruthy();
+    expect(screen.getByText("About")).toBeTruthy();
+  });
+
+  it("should navigate using Links", async () => {
+    getCurrentPath.mockReturnValueOnce("/");
+
+    render(
+      <Router>
+        <Route
+          path="/"
+          Component={() => {
+            return (
+              <>
+                <h1>Home</h1>
+                <Link to="/about">Go to About</Link>
+              </>
+            );
+          }}
+        />
+        <Route path="/about" Component={() => <h1>About</h1>} />
+      </Router>
+    );
+
+    // Click en el link
+    screen.getByText(/Go to About/).click();
+
+    const aboutTitle = await screen.findByText("About");
+
+    // Chequear si la nueva ruta se renderiza
+    expect(aboutTitle).toBeTruthy();
   });
 });
