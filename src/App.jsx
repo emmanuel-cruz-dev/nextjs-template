@@ -1,42 +1,15 @@
 import { useState } from "react";
-import "./App.css";
 import { useEffect } from "react";
 import { EVENTS } from "./consts";
+import "./App.css";
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
 
-function navigate(href) {
+export function navigate(href) {
   window.history.pushState({}, "", href);
   // Crear un evento personalizado
   const navigationEvent = new Event(EVENTS.PUSHSTATE);
   window.dispatchEvent(navigationEvent);
-}
-
-function HomePage() {
-  return (
-    <>
-      <h1>Home</h1>
-      <p>
-        Esta es una página de ejemplo para crear un React Router desde cero.
-      </p>
-      <button onClick={() => navigate("/about")}>Ir a Sobre nosotros</button>
-    </>
-  );
-}
-
-function AboutPage() {
-  return (
-    <>
-      <h1>About</h1>
-      <div>
-        <img
-          style={{ borderRadius: "50%", width: "7rem" }}
-          src="https://github.com/emmanuel-cruz-dev.png"
-          alt="Foto de Emmanuel"
-        />
-      </div>
-      <p>¡Hola! Soy Emmanuel y estoy creando un clon de React Router.</p>
-      <button onClick={() => navigate("/")}>Ir a la home</button>
-    </>
-  );
 }
 
 function App() {
@@ -48,7 +21,7 @@ function App() {
     };
 
     window.addEventListener(EVENTS.PUSHSTATE, onLocationChange);
-    window.addEventListener("popstate", onLocationChange);
+    window.addEventListener(EVENTS.POPSTATE, onLocationChange);
     return () => {
       window.removeEventListener(EVENTS.PUSHSTATE, onLocationChange);
       window.removeEventListener(EVENTS.POPSTATE, onLocationChange);
