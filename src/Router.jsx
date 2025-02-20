@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { EVENTS } from "./consts";
-import Page404 from "./pages/404";
 
 export function Router({
   routes = [],
-  defaultComponent: DefaultComponent = () => <Page404 />,
+  defaultComponent: DefaultComponent = () => <h1>404</h1>,
 }) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
