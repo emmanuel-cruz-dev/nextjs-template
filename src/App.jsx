@@ -5,7 +5,21 @@ import "./App.css";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 
-function App() {
+const routes = [
+  {
+    path: "/",
+    Component: HomePage,
+  },
+  {
+    path: "/about",
+    Component: AboutPage,
+  },
+];
+
+function Router({
+  routes = [],
+  defaultComponent: DefaultComponent = () => null,
+}) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
@@ -21,10 +35,14 @@ function App() {
     };
   }, []);
 
+  const Page = routes.find(({ path }) => path === currentPath)?.Component;
+  return Page ? <Page /> : <DefaultComponent />;
+}
+
+function App() {
   return (
     <main>
-      {currentPath == "/" && <HomePage />}
-      {currentPath == "/about" && <AboutPage />}
+      <Router routes={routes} />
     </main>
   );
 }
