@@ -28,13 +28,12 @@ export function Router({
   const routesFromChildren = Children.map(children, ({ props, type }) => {
     const { name } = type;
     const isRoute = name === "Route";
-
     return isRoute ? props : null;
   });
 
-  console.log(routesFromChildren);
+  const routesToUse = routes.concat(routesFromChildren);
 
-  const Page = routes.find(({ path }) => {
+  const Page = routesToUse.find(({ path }) => {
     if (path === currentPath) return true;
 
     // Uso de path-to-regexp para detectar rutas dinámicas
