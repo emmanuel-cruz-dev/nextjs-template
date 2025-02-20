@@ -26,10 +26,14 @@ export function Router({
   const Page = routes.find(({ path }) => {
     if (path === currentPath) return true;
 
+    // Uso de path-to-regexp para detectar rutas dinámicas
     const matcherUrl = match(path, { decode: decodeURIComponent });
     const matched = matcherUrl(currentPath);
+
     if (!matched) return false;
 
+    // Guarda los parámetros de la url que eran dinámicos
+    // que hemos extraído con path-to-regexp
     routeParams = matched.params; // { query: "javascript" }
     return true;
   })?.Component;
