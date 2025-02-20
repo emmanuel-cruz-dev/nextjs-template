@@ -3,7 +3,7 @@ import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import { Router } from "./Router";
 
-const routes = [
+const appRoutes = [
   {
     path: "/",
     Component: HomePage,
@@ -17,7 +17,7 @@ const routes = [
 function App() {
   return (
     <main>
-      <Router routes={routes} />
+      <Router routes={appRoutes} />
     </main>
   );
 }
