@@ -1,4 +1,4 @@
-import { navigate } from "../App";
+import { navigate } from "../Link";
 
 export default function HomePage() {
   return (
