@@ -12,7 +12,7 @@ export default function AboutPage() {
         />
       </div>
       <p>¡Hola! Soy Emmanuel y estoy creando un clon de React Router.</p>
-      <Link to={"/"}>Ir a la home</Link>
+      <Link to={"/"}>Ir a Home</Link>
     </>
   );
 }
