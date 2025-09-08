@@ -7,6 +7,7 @@ export default function HomePage() {
       <p>
         Esta es una página de ejemplo para crear un React Router desde cero.
       </p>
+      <p>Siguiendo un tutorial</p>
       <Link to={"/about"}>Ir a Sobre nosotros</Link>
     </>
   );
